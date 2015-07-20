@@ -1,0 +1,45 @@
+<html>
+<head>
+<script type="text/javascript" src="./jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $("#btTranslate_enzh").click(function(){
+          $("#lanCode").val("");
+          $("#translatedText").html("");
+          var txt = $('#inputStr');
+          if (txt.val() != "") {
+          $.post( 'translateENZH.php', { 'inputStr': txt.val() }, function( data )
+              {
+                    $("#lanCode").val(data.languageCode);
+                    $("#translatedText").html(data.translated);
+              }, "json");
+          }
+
+       });
+       $("#btTranslate_dezh").click(function(){
+          $("#lanCode").val("");
+          $("#translatedText").html("");
+          var txt = $('#inputStr');
+          if (txt.val() != "") {
+          $.post( "translateDEZH.php", { 'inputStr': txt.val() }, function( data )
+          {
+               $("#lanCode").val(data.languageCode);
+               $("#translatedText").html(data.translated);
+              }, "json");
+          }
+
+       });
+    });
+</script>
+</head>
+<body>
+<form>
+<input type="text" name="inputStr" id="inputStr" />
+<input type="button" name="btTranslate_enzh" id="btTranslate_enzh" value="en-zh" />
+<input type="button"  name="btTranslate_dezh" id="btTranslate_dezh" value="de-zh" />
+<input type="text" name="lanCode" id="lanCode" readonly />
+</form>
+<textarea name="translatedText" id="translatedText" cols="60" rows="10"></textarea>
+
+</body>
+</html>
